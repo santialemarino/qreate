@@ -1,0 +1,10 @@
+/* Tailwind imports */
+@import 'tailwindcss';
+@import 'tw-animate-css';
+
+/* Shared CSS styles */
+@import '@qreate/ui/styles';
+
+/* Import design system and Shadcn styles */
+/* Shared Tailwind variables */
+@import '@qreate/ui/theme';

@@ -1,0 +1,19 @@
+{
+  "name": "api",
+  "version": "1.0.0",
+  "description": "Go backend API for Qreate",
+  "scripts": {
+    "dev": "go run main.go",
+    "build": "go build -o bin/api main.go",
+    "start": "go run main.go",
+    "test": "go test ./...",
+    "lint": "golangci-lint run",
+    "clean": "rm -rf bin/"
+  },
+  "keywords": [
+    "go",
+    "api",
+    "backend"
+  ],
+  "license": "ISC"
+}
