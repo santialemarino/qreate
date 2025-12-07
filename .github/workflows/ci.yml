@@ -1,0 +1,54 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  lint-and-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10.13.1
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'pnpm'
+      - uses: actions/setup-go@v5
+        with:
+          go-version: '1.24'
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+      - name: Install Go dependencies
+        working-directory: apps/api
+        run: go mod download
+      - name: Install golangci-lint
+        uses: golangci/golangci-lint-action@v4
+        with:
+          version: latest
+          working-directory: apps/api
+      - name: Lint frontend
+        run: pnpm lint
+      - name: Type check frontend
+        run: pnpm check-types
+      - name: Format check (Go)
+        working-directory: apps/api
+        run: |
+          if [ -n "$(gofmt -l .)" ]; then
+            echo "Go files are not formatted. Run 'gofmt -w .' to fix."
+            gofmt -d .
+            exit 1
+          fi
+      - name: Build UI package
+        run: pnpm build:ui
+      - name: Build all
+        run: pnpm build
+      - name: Build API
+        working-directory: apps/api
+        run: go build -o /tmp/api-test .

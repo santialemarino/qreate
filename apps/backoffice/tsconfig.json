@@ -1,0 +1,11 @@
+{
+  "extends": "@qreate/tsconfig/nextjs.json",
+  "compilerOptions": {
+    "paths": {
+      "@/*": ["./src/*"],
+      "public/*": ["./public/*"]
+    }
+  },
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "types.d.ts"],
+  "exclude": ["node_modules"]
+}

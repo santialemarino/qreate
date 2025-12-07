@@ -1,0 +1,61 @@
+{
+  "name": "qreate",
+  "version": "1.0.0",
+  "description": "QR Code Management Platform",
+  "private": true,
+  "packageManager": "pnpm@10.13.1",
+  "scripts": {
+    "dev": "turbo run dev --parallel",
+    "build": "turbo run build",
+    "start": "turbo run start --parallel",
+    "lint": "turbo run lint",
+    "check-types": "turbo run check-types",
+    "clean": "pnpm --recursive exec rm -rf node_modules .next dist",
+    "install:all": "pnpm install",
+    "dev:ui": "pnpm --filter ui run dev",
+    "dev:backoffice": "pnpm --filter backoffice run dev",
+    "dev:webapp": "pnpm --filter webapp run dev",
+    "dev:api": "pnpm --filter api run dev",
+    "build:ui": "pnpm --filter ui run build",
+    "build:backoffice": "pnpm --filter backoffice run build",
+    "build:webapp": "pnpm --filter webapp run build",
+    "build:api": "pnpm --filter api run build",
+    "prepare": "husky"
+  },
+  "lint-staged": {
+    "apps/backoffice/**/*.{ts,tsx,js,jsx}": [
+      "pnpm --filter backoffice run lint:fix",
+      "pnpm --filter backoffice run format"
+    ],
+    "apps/webapp/**/*.{ts,tsx,js,jsx}": [
+      "pnpm --filter webapp run lint:fix",
+      "pnpm --filter webapp run format"
+    ],
+    "*.go": [
+      "gofmt -w"
+    ]
+  },
+  "keywords": [
+    "qreate",
+    "qr-code",
+    "nextjs",
+    "monorepo",
+    "typescript"
+  ],
+  "devDependencies": {
+    "@eslint/eslintrc": "^3.3.1",
+    "@ianvs/prettier-plugin-sort-imports": "^4.7.0",
+    "eslint": "^9.38.0",
+    "eslint-config-next": "^16.0.1",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-prettier": "^5.5.4",
+    "eslint-plugin-react-hooks": "^5.2.0",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.2.6",
+    "prettier": "^3.6.2",
+    "prettier-plugin-packagejson": "^2.5.20",
+    "prettier-plugin-tailwindcss": "^0.7.2",
+    "turbo": "latest",
+    "typescript": "^5.9.3"
+  }
+}

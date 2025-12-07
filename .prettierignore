@@ -1,0 +1,22 @@
+# Build outputs
+**/*/.next/
+**/dist/
+**/build/
+**/coverage/
+
+# Dependencies and caches
+**/node_modules/
+.pnp.cjs
+**/.pnpm-store/
+
+# Generated artifacts
+**/*.generated.*
+**/*.gen.*
+**/*.snap
+
+# Go and backend artifacts
+apps/api/sql/
+**/*.go
+
+# Misc
+pnpm-lock.yaml

@@ -1,0 +1,37 @@
+name: CI Backoffice Test
+
+run-name: 'CI Backoffice Test by @${{ github.actor }}'
+
+on:
+  workflow_call:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - 'apps/backoffice/**'
+      - 'packages/**'
+      - 'package.json'
+      - 'pnpm-lock.yaml'
+      - 'turbo.json'
+  workflow_dispatch:
+
+jobs:
+  lint-backoffice:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10.13.1
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'pnpm'
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+      - name: Verify workspace setup
+        run: pnpm list --depth=0
+      - name: Run linter on backoffice
+        run: pnpm --filter backoffice run lint
+      - name: Type check
+        run: pnpm --filter backoffice run check-types
